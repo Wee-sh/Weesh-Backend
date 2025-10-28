@@ -1,7 +1,7 @@
 ---
 name: Todo
 about: "할 일이 있어요 \U0001F697"
-title: "[FEAT]"
+title: "⭐️"
 labels: ''
 assignees: pji-min
 

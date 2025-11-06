@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.5.7"
     id("io.spring.dependency-management") version "1.1.7"
     kotlin("plugin.jpa") version "1.9.25"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
 }
 
 group = "wee"
@@ -57,4 +58,13 @@ allOpen {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+ktlint {
+    verbose.set(true)
+    outputToConsole.set(true)
+    filter {
+        exclude("**/generated/**")
+        include("**/kotlin/**")
+    }
 }

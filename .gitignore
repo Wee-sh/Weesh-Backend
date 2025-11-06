@@ -1,0 +1,10 @@
+# Gradle build outputs
+.gradle/
+build/
+
+# IntelliJ IDEA
+.idea/
+out/
+
+# OS-specific
+.DS_Store

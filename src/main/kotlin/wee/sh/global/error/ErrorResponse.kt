@@ -2,7 +2,7 @@ package wee.sh.global.error
 
 import wee.sh.global.error.exception.ErrorCode
 
-class ErrorResponse (
+class ErrorResponse(
     val status: Int,
     val message: String
 

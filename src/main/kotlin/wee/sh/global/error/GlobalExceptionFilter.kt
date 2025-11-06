@@ -27,7 +27,6 @@ class GlobalExceptionFilter(
 
             val errorResponse = ErrorResponse.of(errorCode, errorCode.message)
             objectMapper.writeValue(response.writer, errorResponse)
-
         } catch (e: Exception) {
             println("e.message = ${e.message}")
             response.status = response.status

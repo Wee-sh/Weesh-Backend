@@ -1,6 +1,7 @@
 # .coderabbit.yaml
 language: "ko-KR"
 early_access: false
+
 reviews:
   profile: "chill"
   request_changes_workflow: true
@@ -8,8 +9,13 @@ reviews:
   poem: true
   review_status: true
   collapse_walkthrough: false
+
   auto_review:
     enabled: true
     drafts: false
+    base_branches:
+      - main
+      - develop
+
 chat:
   auto_reply: true

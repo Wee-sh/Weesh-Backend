@@ -1,0 +1,26 @@
+package wee.sh.global.error
+
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.ExceptionHandler
+import org.springframework.web.bind.annotation.RestControllerAdvice
+import wee.sh.global.error.exception.ErrorCode
+import wee.sh.global.error.exception.WeeShException
+
+@RestControllerAdvice
+class GlobalExceptionHandler {
+
+    @ExceptionHandler(WeeShException::class) // WeeShException 발생 시 이 메서드 자동 실행
+    fun handleWeeShException(e: WeeShException): ResponseEntity<ErrorResponse> {
+        val errorCode = e.errorCode
+        val response = ErrorResponse.of(errorCode, errorCode.message)
+        return ResponseEntity(response, HttpStatus.valueOf(errorCode.status))
+    }
+
+    @ExceptionHandler(Exception::class) // 예상치 못한 에러
+    fun handleException(e: Exception): ResponseEntity<ErrorResponse> {
+        val errorCode = ErrorCode.INTERNAL_SERVER_ERROR
+        val response = ErrorResponse.of(errorCode, e.message ?: "Unknown error")
+        return ResponseEntity(response, HttpStatus.INTERNAL_SERVER_ERROR)
+    }
+}

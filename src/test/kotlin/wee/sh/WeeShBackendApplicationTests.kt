@@ -9,5 +9,4 @@ class WeeShBackendApplicationTests {
     @Test
     fun contextLoads() {
     }
-
 }

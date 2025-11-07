@@ -1,10 +1,36 @@
-# Gradle build outputs
+# Gradle
 .gradle/
 build/
+!gradle/wrapper/gradle-wrapper.jar
 
 # IntelliJ IDEA
 .idea/
+*.iml
 out/
 
 # OS-specific
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local environment files
+.env
+.env.local
+
+# Kotlin/Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Test reports
+test-results/
+reports/
+
+# Temporary files
+*.tmp
+*.swp
+*.bak
+*.orig

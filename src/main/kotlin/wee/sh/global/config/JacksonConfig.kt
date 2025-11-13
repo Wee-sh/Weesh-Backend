@@ -21,6 +21,7 @@ class JacksonConfig {
             registerModule(JavaTimeModule())
             setSerializationInclusion(JsonInclude.Include.NON_NULL)
             disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+            disable(SerializationFeature.WRITE_DATE_TIMESTAMPS_AS_NANOSECONDS)
         }
     }
 }

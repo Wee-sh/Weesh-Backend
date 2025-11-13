@@ -50,7 +50,6 @@ class KakaoClient(
         }
     }
 
-
     fun getUserInfo(accessToken: String): KakaoUserInfo {
         val headers = HttpHeaders().apply {
             set("Authorization", "Bearer $accessToken")

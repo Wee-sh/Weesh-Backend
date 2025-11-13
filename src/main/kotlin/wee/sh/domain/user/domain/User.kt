@@ -8,7 +8,6 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Column
 import java.time.LocalDateTime
 
-
 @Entity
 @Table(name = "tbl_user")
 class User(

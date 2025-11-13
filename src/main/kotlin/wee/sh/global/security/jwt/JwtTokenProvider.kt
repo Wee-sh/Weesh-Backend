@@ -24,7 +24,7 @@ import javax.crypto.SecretKey
 @Component
 class JwtTokenProvider(
     private val jwtProperties: JwtProperties,
-    private val refreshTokenRepository: RefreshTokenRepository,
+    private val refreshTokenRepository: RefreshTokenRepository
 ) {
     private val logger = LoggerFactory.getLogger(javaClass)
     private val secretKey: SecretKey = Keys.hmacShaKeyFor(jwtProperties.secret.toByteArray())
@@ -62,7 +62,7 @@ class JwtTokenProvider(
         val refreshToken = RefreshToken(
             token = token,
             userId = userId,
-            ttl = jwtProperties.refreshExp  // 초 단위 그대로 저장 (수정!)
+            ttl = jwtProperties.refreshExp
         )
         refreshTokenRepository.save(refreshToken)
 

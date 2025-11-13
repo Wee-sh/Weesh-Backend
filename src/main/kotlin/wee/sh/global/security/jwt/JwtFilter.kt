@@ -27,8 +27,11 @@ class JwtFilter(
             if (token != null) {
                 val authentication = jwtTokenProvider.getAuthentication(token)
                 SecurityContextHolder.getContext().authentication = authentication
-                log.debug("Set Authentication to security context for '{}', uri: {}",
-                    authentication.name, request.requestURI)
+                log.debug(
+                    "Set Authentication to security context for '{}', uri: {}",
+                    authentication.name,
+                    request.requestURI
+                )
             }
         } catch (e: ExpiredTokenException) {
             log.debug("Expired JWT token: {}", request.requestURI)

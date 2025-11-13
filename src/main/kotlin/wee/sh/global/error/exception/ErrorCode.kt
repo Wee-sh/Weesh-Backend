@@ -20,6 +20,6 @@ enum class ErrorCode(
     // kakao oauth
     KAKAO_API_ERROR(500, "Kakao API Error"),
     INVALID_KAKAO_TOKEN(401, "Invalid Kakao Token"),
-    KAKAO_USER_INFO_NULL(500, "Kakao User Info Null"),
+    KAKAO_USER_INFO_NULL(500, "Kakao User Info Null")
     ;
 }

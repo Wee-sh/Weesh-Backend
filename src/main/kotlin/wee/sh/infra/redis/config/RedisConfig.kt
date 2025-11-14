@@ -29,7 +29,7 @@ class RedisConfig {
         // 어떻게 연결할까?
         val clientConfig = LettuceClientConfiguration.builder()
             .commandTimeout(Duration.ofSeconds(1))
-            .shutdownTimeout(Duration.ZERO)
+            .shutdownTimeout(Duration.ofMillis(100))
             .build()
 
         logger.info("Connected to Redis at {}:{}", host, port)

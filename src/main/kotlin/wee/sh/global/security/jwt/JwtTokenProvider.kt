@@ -81,6 +81,25 @@ class JwtTokenProvider(
         return UsernamePasswordAuthenticationToken(userId, "", emptyList())
     }
 
+    fun validateRefreshToken(token: String): Long {
+        val claims = getClaims(token)
+
+        if (claims.header[Header.TYPE] != TOKEN_TYPE_REFRESH) {
+            throw InvalidTokenException
+        }
+
+        val userId = claims.body.subject?.toLongOrNull() ?: throw InvalidTokenException
+
+        val savedToken = refreshTokenRepository.findById(token)
+            .orElseThrow { InvalidTokenException }
+
+        if (savedToken.userId != userId) {
+            throw InvalidTokenException
+        }
+
+        return userId
+    }
+
     private fun getClaims(token: String): Jws<Claims> {
         return try {
             Jwts.parser()

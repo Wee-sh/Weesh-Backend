@@ -9,7 +9,7 @@ import wee.sh.global.security.jwt.JwtTokenProvider
 import wee.sh.infra.oauth2.kakao.client.KakaoClient
 
 @Service
-class AuthService(
+class KakaoLoginService(
     private val userRepository: UserRepository,
     private val kakaoClient: KakaoClient,
     private val jwtTokenProvider: JwtTokenProvider

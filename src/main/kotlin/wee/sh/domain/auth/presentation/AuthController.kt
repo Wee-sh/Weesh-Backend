@@ -11,32 +11,27 @@ import wee.sh.domain.auth.presentation.dto.response.LoginResponse
 import wee.sh.domain.auth.presentation.dto.response.TokenResponse
 import wee.sh.domain.auth.service.KakaoLoginService
 import wee.sh.domain.auth.service.ReissueService
-import wee.sh.infra.oauth2.kakao.client.KakaoClient
-import wee.sh.infra.oauth2.kakao.config.KakaoProperties
 
 @RestController
 @RequestMapping("/auth")
 class AuthController(
     private val kakaoLoginService: KakaoLoginService,
-    private val reissueService: ReissueService,
-    private val kakaoClient: KakaoClient,
-    private val kakaoProperties: KakaoProperties
+    private val reissueService: ReissueService
 ) {
 
     @PostMapping("/kakao")
-    fun kakaoLogin(@Validated @RequestBody request: KakaoLoginRequest): LoginResponse {
-        val accessToken = kakaoClient .getAccessToken(
-            request.code,
-            kakaoProperties.redirectUri,
-            kakaoProperties.clientId,
-            kakaoProperties.clientSecret
-        )
-
-        return kakaoLoginService.loginWithKakao(accessToken)
+    fun kakaoLogin(
+        @Validated @RequestBody
+        request: KakaoLoginRequest
+    ): LoginResponse {
+        return kakaoLoginService.loginWithKakao(request.code)
     }
 
     @PostMapping("/reissue")
-    fun reissue(@Validated @RequestBody request: ReissueRequest): TokenResponse {
+    fun reissue(
+        @Validated @RequestBody
+        request: ReissueRequest
+    ): TokenResponse {
         return reissueService.reissue(request.refreshToken)
     }
 }

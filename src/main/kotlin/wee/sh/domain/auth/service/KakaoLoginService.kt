@@ -7,15 +7,24 @@ import wee.sh.domain.user.domain.User
 import wee.sh.domain.user.domain.repository.UserRepository
 import wee.sh.global.security.jwt.JwtTokenProvider
 import wee.sh.infra.oauth2.kakao.client.KakaoClient
+import wee.sh.infra.oauth2.kakao.config.KakaoProperties
 
 @Service
 class KakaoLoginService(
     private val userRepository: UserRepository,
     private val kakaoClient: KakaoClient,
-    private val jwtTokenProvider: JwtTokenProvider
+    private val jwtTokenProvider: JwtTokenProvider,
+    private val kakaoProperties: KakaoProperties
 ) {
     @Transactional
-    fun loginWithKakao(accessToken: String): LoginResponse {
+    fun loginWithKakao(code: String): LoginResponse {
+        val accessToken = kakaoClient.getAccessToken(
+            code = code,
+            redirectUri = kakaoProperties.redirectUri,
+            clientId = kakaoProperties.clientId,
+            clientSecret = kakaoProperties.clientSecret
+        )
+
         val kakaoUserInfo = kakaoClient.getUserInfo(accessToken)
         val kakaoId = kakaoUserInfo.toKakaoId()
 

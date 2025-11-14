@@ -20,7 +20,7 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException::class) // Valid 예외 발생 시 실행
     fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
-        val errorCode = ErrorCode.BadRequest
+        val errorCode = ErrorCode.BAD_REQUEST
         val response = ErrorResponse.of(errorCode, errorCode.message)
         return ResponseEntity(response, HttpStatus.valueOf(errorCode.status))
     }

@@ -14,6 +14,7 @@ enum class ErrorCode(
     BadRequest(400, "Bad Request"),
 
     // jwt
+    UNAUTHORIZED(401, "Unauthorized"),
     INVALID_TOKEN(401, "Invalid Token"),
     EXPIRED_TOKEN(401, "Expired Token"),
 

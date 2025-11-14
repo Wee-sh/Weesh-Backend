@@ -32,7 +32,7 @@ class RedisConfig {
             .shutdownTimeout(Duration.ofMillis(100))
             .build()
 
-        logger.info("Connected to Redis at {}:{}", host, port)
+        logger.info("Configured Redis connection to {}:{}", host, port)
         return LettuceConnectionFactory(redisConfig, clientConfig) // 이 두 Config를 토대로 redis에 연결해라
     }
 }

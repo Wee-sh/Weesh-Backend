@@ -9,6 +9,7 @@ import jakarta.persistence.Column
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.FetchType
 import jakarta.persistence.JoinColumn
+import org.springframework.data.annotation.CreatedDate
 import wee.sh.domain.user.domain.User
 import java.time.LocalDateTime
 
@@ -37,8 +38,9 @@ class Compliment(
     @Column(nullable = false)
     val giftTemplate: Int,
 
-    @Column(nullable = false)
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    var createdAt: LocalDateTime? = null
 ) {
     companion object {
         fun create(

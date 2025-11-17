@@ -35,8 +35,7 @@ class JwtFilter(
                 )
             } catch (e: ExpiredTokenException) {
                 throw JwtAuthenticationException(e.errorCode, e)
-            }
-            catch (e: InvalidTokenException) {
+            } catch (e: InvalidTokenException) {
                 throw JwtAuthenticationException(e.errorCode, e)
             }
         }

@@ -34,14 +34,14 @@ class ComplimentController(
 
     @GetMapping("/sent")
     fun getSentCompliments(
-        @AuthenticationPrincipal userId: Long,
+        @AuthenticationPrincipal userId: Long
     ): List<ComplimentResponse> {
         return getSentComplimentService.getSentCompliment(userId)
     }
 
     @GetMapping("/received")
     fun getReceivedCompliments(
-        @AuthenticationPrincipal userId: Long,
+        @AuthenticationPrincipal userId: Long
     ): List<ComplimentResponse> {
         return getReceivedComplimentService.getReceivedCompliment(userId)
     }

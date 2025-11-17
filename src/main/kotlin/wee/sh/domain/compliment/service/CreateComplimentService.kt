@@ -25,7 +25,7 @@ class CreateComplimentService(
         val toUser = userRepository.findByIdOrNull(request.toUserId)
             ?: throw UserNotFoundException
 
-        if(fromUser == toUser) {
+        if (fromUser == toUser) {
             throw SelfComplimentNotAllowedException
         }
 

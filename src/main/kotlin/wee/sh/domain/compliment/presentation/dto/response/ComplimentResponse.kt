@@ -19,7 +19,7 @@ data class ComplimentResponse(
                 toUserName = compliment.toUser.nickname,
                 content = compliment.content,
                 giftTemplate = compliment.giftTemplate,
-                createdAt = compliment.createdAt
+                createdAt = compliment.createdAt ?: LocalDateTime.now()
             )
         }
     }

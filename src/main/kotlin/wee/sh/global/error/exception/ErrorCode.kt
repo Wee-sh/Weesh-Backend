@@ -30,6 +30,6 @@ enum class ErrorCode(
     TREE_NOT_FOUND(404, "Tree not found"),
 
     // compliment
-    SELF_COMPLIMENT_NOT_ALLOWED(400, "Self compliment not allowed"),
+    SELF_COMPLIMENT_NOT_ALLOWED(400, "Self compliment not allowed")
     ;
 }

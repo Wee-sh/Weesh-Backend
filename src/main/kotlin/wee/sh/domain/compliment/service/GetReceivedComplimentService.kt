@@ -11,8 +11,8 @@ class GetReceivedComplimentService(
 ) {
 
     @Transactional(readOnly = true)
-    fun getReceivedCompliment(fromUserId: Long): List<ComplimentResponse>{
-        val compliments = complimentRepository.findAllByToUserId(fromUserId)
+    fun getReceivedCompliment(userId: Long): List<ComplimentResponse>{
+        val compliments = complimentRepository.findAllByToUserId(userId)
 
         return compliments.map { ComplimentResponse.from(it) }
     }

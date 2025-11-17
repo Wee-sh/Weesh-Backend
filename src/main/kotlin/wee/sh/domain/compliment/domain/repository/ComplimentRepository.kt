@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository
 import wee.sh.domain.compliment.domain.Compliment
 
 interface ComplimentRepository : CrudRepository<Compliment, Long> {
-    fun findAllByToUserId(toUserId: Long): List<Compliment>
-    fun findAllByFromUserId(fromUserId: Long): List<Compliment>
+    fun findAllByToUserId(userId: Long): List<Compliment>
+    fun findAllByFromUserId(userId: Long): List<Compliment>
 }

@@ -1,20 +1,23 @@
 package wee.sh.domain.tree.domain
 
-import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
+import jakarta.persistence.Table
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Column
 import jakarta.persistence.OneToOne
+import jakarta.persistence.FetchType
+import jakarta.persistence.JoinColumn
 import wee.sh.domain.user.domain.User
 import java.util.UUID
 
 @Entity
+@Table(name = "tbl_tree")
 class Tree(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, unique = true)
     val id: Long = 0L,
 
     @OneToOne(fetch = FetchType.LAZY)

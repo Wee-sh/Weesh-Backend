@@ -27,6 +27,9 @@ enum class ErrorCode(
     USER_NOT_FOUND(404, "User not found"),
 
     // tree
-    TREE_NOT_FOUND(404, "Tree not found")
+    TREE_NOT_FOUND(404, "Tree not found"),
+
+    // compliment
+    SELF_COMPLIMENT_NOT_ALLOWED(400, "Self compliment not allowed")
     ;
 }

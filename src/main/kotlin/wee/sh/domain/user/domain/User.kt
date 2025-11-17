@@ -13,8 +13,8 @@ import java.time.LocalDateTime
 class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    var id: Long = 0,
+    @Column(nullable = false, unique = true)
+    val id: Long = 0L,
 
     @Column(nullable = false, unique = true)
     var kakaoId: String,

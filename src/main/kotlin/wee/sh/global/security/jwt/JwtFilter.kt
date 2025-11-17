@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 import wee.sh.global.security.exception.ExpiredTokenException
 import wee.sh.global.security.exception.InvalidTokenException
-import org.springframework.security.core.AuthenticationException
 import wee.sh.global.error.exception.JwtAuthenticationException
 
 @Component
@@ -35,10 +34,10 @@ class JwtFilter(
                     request.requestURI
                 )
             } catch (e: ExpiredTokenException) {
-                throw JwtAuthenticationException(e.errorCode)
+                throw JwtAuthenticationException(e.errorCode, e)
             }
             catch (e: InvalidTokenException) {
-                throw JwtAuthenticationException(e.errorCode)
+                throw JwtAuthenticationException(e.errorCode, e)
             }
         }
 

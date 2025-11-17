@@ -9,5 +9,6 @@ import org.springframework.security.core.AuthenticationException
  * AuthenticationException을 상속한 커스텀 예외로 감싸서 던져야함
  */
 class JwtAuthenticationException(
-    val errorCode: ErrorCode
+    val errorCode: ErrorCode,
+    cause: Throwable? = null // 원본 예외를 저장하기 위해
 ) : AuthenticationException(errorCode.message)

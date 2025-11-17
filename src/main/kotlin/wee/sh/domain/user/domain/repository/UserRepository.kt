@@ -5,5 +5,4 @@ import wee.sh.domain.user.domain.User
 
 interface UserRepository : JpaRepository<User, Long> {
     fun findByKakaoId(kakaoId: String): User?
-    fun existsByKakaoId(kakaoId: String): Boolean
 }

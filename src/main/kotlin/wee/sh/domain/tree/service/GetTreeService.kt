@@ -7,7 +7,6 @@ import wee.sh.domain.tree.domain.repository.TreeRepository
 import wee.sh.domain.user.domain.exception.UserNotFoundException
 import wee.sh.domain.user.domain.repository.UserRepository
 import org.springframework.data.repository.findByIdOrNull
-import wee.sh.domain.tree.domain.Tree
 import wee.sh.domain.tree.presentation.dto.response.TreeResponse
 
 @Service
@@ -16,16 +15,25 @@ class GetTreeService(
     private val userRepository: UserRepository
 ) {
     @Transactional(readOnly = true)
-    fun getTree(userId: Long): TreeResponse { // 추후 엔티티 반환으로 수정할 것임
+    fun getTree(userId: Long): TreeResponse {
         val user = userRepository.findByIdOrNull(userId)
+            ?.takeIf { !it.isDeleted() }
             ?: throw UserNotFoundException
-
-        if (user.isDeleted()) {
-            throw UserNotFoundException
-        }
 
         val tree = treeRepository.findByUser(user)
             ?: throw TreeNotFoundException
+
+        return TreeResponse.from(tree)
+    }
+
+    @Transactional(readOnly = true)
+    fun getTreeByShareToken(shareToken: String): TreeResponse {
+        val tree = treeRepository.findByShareToken(shareToken)
+            ?: throw TreeNotFoundException
+
+        if (tree.user.isDeleted()) {
+            throw UserNotFoundException
+        }
 
         return TreeResponse.from(tree)
     }

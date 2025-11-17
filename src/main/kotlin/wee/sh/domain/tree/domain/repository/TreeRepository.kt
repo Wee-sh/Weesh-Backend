@@ -6,4 +6,5 @@ import wee.sh.domain.user.domain.User
 
 interface TreeRepository : CrudRepository<Tree, Long> {
     fun findByUser(user: User): Tree?
+    fun findByShareToken(shareToken: String): Tree?
 }

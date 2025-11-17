@@ -76,7 +76,7 @@ class JwtTokenProvider(
             throw InvalidTokenException
         }
 
-        val userId = claims.body.subject ?: throw InvalidTokenException
+        val userId = claims.body.subject?.toLongOrNull() ?: throw InvalidTokenException
 
         return UsernamePasswordAuthenticationToken(userId, "", emptyList())
     }

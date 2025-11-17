@@ -14,6 +14,7 @@ class TreeController(
 ) {
     @GetMapping("/{userId}")
     fun getTree(@PathVariable userId: Long): TreeResponse {
-        return getTreeService.getTree(userId)
+        val tree = getTreeService.getTree(userId)
+        return TreeResponse.from(tree)
     }
 }

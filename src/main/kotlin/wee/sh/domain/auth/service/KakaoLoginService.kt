@@ -36,12 +36,7 @@ class KakaoLoginService(
 
         val tokenResponse = jwtTokenProvider.generateTokens(user.id)
 
-        return LoginResponse(
-            token = tokenResponse,
-            userId = user.id,
-            nickname = user.nickname,
-            templateId = user.templateId
-        )
+        return LoginResponse.of(user, tokenResponse)
     }
 
     private fun createUserWithTree(kakaoId: String, nickname: String): User {

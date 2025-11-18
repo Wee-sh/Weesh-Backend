@@ -35,8 +35,8 @@ class User(
         require(!nicknameChanged) { "닉네임은 1회만 변경 가능합니다." }
         require(newNickname.length in 1..20) { "닉네임은 1~20자 이내여야 합니다." }
 
-        this.nickname = newNickname
-        this.nicknameChanged = true
+        nickname = newNickname
+        nicknameChanged = true
     }
 
     fun softDelete() {

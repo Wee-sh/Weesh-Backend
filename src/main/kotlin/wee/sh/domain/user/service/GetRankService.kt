@@ -9,12 +9,7 @@ class GetRankService(
     private val complimentRepository: ComplimentRepository
 ) {
     fun getRank(): List<UserRankResponse> {
-        return complimentRepository.findUserRank().map { projection ->
-            UserRankResponse(
-                userId = projection.userId,
-                nickname = projection.userNickname,
-                sentCount = projection.sentCount
-            )
-        }
+        return complimentRepository.findUserRank()
+            .map { UserRankResponse.from(it) }
     }
 }

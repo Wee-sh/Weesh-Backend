@@ -4,20 +4,22 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
-import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 @Component
 class DateWriteRestrictionInterceptor : HandlerInterceptor {
 
-    private val closeAt: LocalDateTime =
-        LocalDateTime.of(2025, 12, 24, 20, 30)
+    private val closeAt: ZonedDateTime =
+        ZonedDateTime.of(2025, 12, 24, 20, 30, 0, 0, ZoneId.of("Asia/Seoul"))
 
     override fun preHandle(
         request: HttpServletRequest,
         response: HttpServletResponse,
         handler: Any
     ): Boolean {
-        if (request.method == "POST" && LocalDateTime.now().isAfter(closeAt)) {
+        val now = ZonedDateTime.now(ZoneId.of("Asia/Seoul"))
+        if (request.method == "POST" && now.isAfter(closeAt)) {
             response.characterEncoding = "UTF-8"
             response.contentType = "text/plain; charset=UTF-8"
             response.status = HttpServletResponse.SC_FORBIDDEN

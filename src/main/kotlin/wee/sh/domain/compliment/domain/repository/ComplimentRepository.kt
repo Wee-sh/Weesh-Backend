@@ -8,7 +8,9 @@ import wee.sh.domain.user.domain.projection.UserRankProjection
 interface ComplimentRepository : CrudRepository<Compliment, Long> {
     fun findAllByToUserId(userId: Long): List<Compliment>
     fun findAllByFromUserId(userId: Long): List<Compliment>
-    @Query("""
+
+    @Query(
+        """
     SELECT u.id AS userId,
            u.nickname AS userNickname,
            COUNT(c.id) AS sentCount
@@ -16,6 +18,7 @@ interface ComplimentRepository : CrudRepository<Compliment, Long> {
     JOIN c.fromUser u
     GROUP BY u.id, u.nickname
     ORDER BY sentCount DESC
-""")
+"""
+    )
     fun findUserRank(): List<UserRankProjection>
 }

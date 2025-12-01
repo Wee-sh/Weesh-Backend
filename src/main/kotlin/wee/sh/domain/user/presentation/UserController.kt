@@ -29,7 +29,7 @@ class UserController(
     }
 
     @GetMapping("/rank")
-    fun getRank() : List<UserRankResponse> {
+    fun getRank(): List<UserRankResponse> {
         return userRankService.getRank()
     }
 }

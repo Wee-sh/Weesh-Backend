@@ -23,7 +23,7 @@ class GetTreeService(
         val tree = treeRepository.findByUser(user)
             ?: throw TreeNotFoundException
 
-        return TreeResponse.from(tree)
+        return TreeResponse.from(tree, user.nickname)
     }
 
     @Transactional(readOnly = true)
@@ -31,10 +31,13 @@ class GetTreeService(
         val tree = treeRepository.findByShareToken(shareToken)
             ?: throw TreeNotFoundException
 
+        val user = userRepository.findByIdOrNull(tree.user.id)
+            ?: throw UserNotFoundException
+
         if (tree.user.isDeleted()) {
             throw UserNotFoundException
         }
 
-        return TreeResponse.from(tree)
+        return TreeResponse.from(tree, user.nickname)
     }
 }

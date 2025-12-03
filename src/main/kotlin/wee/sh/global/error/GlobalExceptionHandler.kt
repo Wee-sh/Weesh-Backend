@@ -2,6 +2,7 @@ package wee.sh.global.error
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import wee.sh.global.error.exception.ErrorCode
@@ -13,6 +14,13 @@ class GlobalExceptionHandler {
     @ExceptionHandler(WeeShException::class) // WeeShException 발생 시 이 메서드 자동 실행
     fun handleWeeShException(e: WeeShException): ResponseEntity<ErrorResponse> {
         val errorCode = e.errorCode
+        val response = ErrorResponse.of(errorCode, errorCode.message)
+        return ResponseEntity(response, HttpStatus.valueOf(errorCode.status))
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException::class) // Valid 예외 발생 시 실행
+    fun handleMethodArgumentNotValidException(e: MethodArgumentNotValidException): ResponseEntity<ErrorResponse> {
+        val errorCode = ErrorCode.BAD_REQUEST
         val response = ErrorResponse.of(errorCode, errorCode.message)
         return ResponseEntity(response, HttpStatus.valueOf(errorCode.status))
     }

@@ -28,8 +28,7 @@ class GlobalExceptionFilter(
             val errorResponse = ErrorResponse.of(errorCode, errorCode.message)
             objectMapper.writeValue(response.writer, errorResponse)
         } catch (e: Exception) {
-            println("e.message = ${e.message}")
-            response.status = response.status
+            response.status = ErrorCode.INTERNAL_SERVER_ERROR.status
             response.contentType = "application/json"
             response.characterEncoding = "UTF-8"
 

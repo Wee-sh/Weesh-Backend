@@ -12,15 +12,13 @@ import org.springframework.web.bind.annotation.PostMapping
 import wee.sh.domain.compliment.presentation.dto.request.CreateComplimentRequest
 import wee.sh.domain.compliment.presentation.dto.response.ComplimentResponse
 import wee.sh.domain.compliment.service.CreateComplimentService
-import wee.sh.domain.compliment.service.GetReceivedComplimentService
-import wee.sh.domain.compliment.service.GetSentComplimentService
+import wee.sh.domain.compliment.service.GetComplimentService
 
 @RestController
 @RequestMapping("/compliment")
 class ComplimentController(
     private val createComplimentService: CreateComplimentService,
-    private val getSentComplimentService: GetSentComplimentService,
-    private val getReceivedComplimentService: GetReceivedComplimentService
+    private val getComplimentService: GetComplimentService
 ) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -36,13 +34,13 @@ class ComplimentController(
     fun getSentCompliments(
         @AuthenticationPrincipal userId: Long
     ): List<ComplimentResponse> {
-        return getSentComplimentService.getSentCompliment(userId)
+        return getComplimentService.getSentCompliment(userId)
     }
 
     @GetMapping("/received")
     fun getReceivedCompliments(
         @AuthenticationPrincipal userId: Long
     ): List<ComplimentResponse> {
-        return getReceivedComplimentService.getReceivedCompliment(userId)
+        return getComplimentService.getReceivedCompliment(userId)
     }
 }

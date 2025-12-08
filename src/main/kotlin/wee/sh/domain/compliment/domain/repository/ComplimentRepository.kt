@@ -21,4 +21,5 @@ interface ComplimentRepository : CrudRepository<Compliment, Long> {
 """
     )
     fun findUserRank(): List<UserRankProjection>
+    fun existsByFromUserIdAndToUserId(fromUserId: Long, toUserId: Long): Boolean
 }

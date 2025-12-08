@@ -3,6 +3,7 @@ package wee.sh.domain.compliment.service
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import wee.sh.domain.compliment.domain.Compliment
+import wee.sh.domain.compliment.domain.exception.AlreadyComplimentedException
 import wee.sh.domain.compliment.domain.exception.SelfComplimentNotAllowedException
 import wee.sh.domain.compliment.domain.repository.ComplimentRepository
 import wee.sh.domain.compliment.presentation.dto.request.CreateComplimentRequest
@@ -22,6 +23,10 @@ class CreateComplimentService(
 
         if (fromUser == toUser) {
             throw SelfComplimentNotAllowedException
+        }
+
+        if (complimentRepository.existsByFromUserIdAndToUserId(fromUserId, request.toUserId)) {
+            throw AlreadyComplimentedException
         }
 
         val compliment = Compliment.create(

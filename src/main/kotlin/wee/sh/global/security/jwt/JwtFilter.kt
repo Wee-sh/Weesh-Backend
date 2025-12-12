@@ -22,6 +22,11 @@ class JwtFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
+        if (request.method == "OPTIONS") {
+            filterChain.doFilter(request, response)
+            return
+        }
+
         val token = jwtTokenProvider.resolveToken(request)
 
         if (token != null) {

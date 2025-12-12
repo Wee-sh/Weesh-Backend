@@ -17,10 +17,14 @@ class CustomAuthenticationEntryPoint(
         response: HttpServletResponse,
         authException: AuthenticationException
     ) {
+        /**
+         * Spring Security의 필터 체인 내부에서 동작하기 때문에
+         * WebConfig의 CORS 설정이 적용되지 않음 그래서 여기서 명시적 등록함
+         */
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin") ?: "")
         response.setHeader("Access-Control-Allow-Credentials", "true")
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, PATCH, OPTIONS")
-        response.setHeader("Access-Control-Allow-Headers", "")
+        response.setHeader("Access-Control-Allow-Headers", "*")
         response.setHeader("Access-Control-Max-Age", "3600")
 
         response.status = 401

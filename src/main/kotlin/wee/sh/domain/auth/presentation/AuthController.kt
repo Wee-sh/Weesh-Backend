@@ -24,7 +24,7 @@ class AuthController(
         @Validated @RequestBody
         request: KakaoLoginRequest
     ): LoginResponse {
-        return kakaoLoginService.loginWithKakao(request.code)
+        return kakaoLoginService.loginWithKakao(request.code, request.redirectUri)
     }
 
     @PostMapping("/reissue")

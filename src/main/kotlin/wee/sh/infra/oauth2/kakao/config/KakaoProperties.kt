@@ -8,5 +8,4 @@ import org.springframework.context.annotation.Configuration
 class KakaoProperties {
     lateinit var clientId: String
     lateinit var clientSecret: String
-    lateinit var redirectUri: String
 }

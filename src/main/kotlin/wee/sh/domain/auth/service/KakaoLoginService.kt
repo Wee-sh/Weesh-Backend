@@ -20,10 +20,10 @@ class KakaoLoginService(
     private val kakaoProperties: KakaoProperties
 ) {
     @Transactional
-    fun loginWithKakao(code: String): LoginResponse {
+    fun loginWithKakao(code: String, redirectUri: String): LoginResponse {
         val accessToken = kakaoClient.getAccessToken(
             code = code,
-            redirectUri = kakaoProperties.redirectUri,
+            redirectUri = redirectUri,
             clientId = kakaoProperties.clientId,
             clientSecret = kakaoProperties.clientSecret
         )

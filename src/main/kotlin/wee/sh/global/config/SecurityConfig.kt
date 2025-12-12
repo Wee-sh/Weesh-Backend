@@ -3,6 +3,7 @@ package wee.sh.global.config
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -19,7 +20,6 @@ class SecurityConfig(
     private val objectMapper: ObjectMapper,
     private val authenticationEntryPoint: CustomAuthenticationEntryPoint
 ) {
-
     @Bean
     fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder()
@@ -33,14 +33,13 @@ class SecurityConfig(
             .formLogin { it.disable() }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            } // 세션 기반 인증 안함
+            }
             .exceptionHandling {
                 it.authenticationEntryPoint(authenticationEntryPoint)
-            } // 401 처리 이 프로젝트에서는 role이 없어서 403 핸들러는 만들지 않음
+            }
             .authorizeHttpRequests {
-                it.requestMatchers(
-                    "/auth/**"
-                ).permitAll()
+                it.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                    .requestMatchers("/auth/**").permitAll()
                     .anyRequest().authenticated()
             }
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter::class.java)

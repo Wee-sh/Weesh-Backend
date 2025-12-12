@@ -31,6 +31,6 @@ enum class ErrorCode(
 
     // compliment
     SELF_COMPLIMENT_NOT_ALLOWED(400, "Self compliment not allowed"),
-    ALREADY_COMPLIMENTED(409, "Already compliment"),
+    ALREADY_COMPLIMENTED(409, "Already compliment")
     ;
 }
